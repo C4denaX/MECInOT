@@ -17,7 +17,7 @@ if __name__=='__main__':
 	parser.add_option("-b", "--brokerip", action="store", dest="brokerip", metavar="<broker-IP>", default="localhost", help="MQTT broker IP. Default is localhost")
 	
 	(options, args) = parser.parse_args()
-	broker_ip = "172.17.0.2"
+	broker_ip = "10.0.0.1"
 	port = 1883
 	mqtt_client = mqtt.Client()
 	mqtt_client.on_connect = on_connect
