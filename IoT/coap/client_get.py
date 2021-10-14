@@ -9,7 +9,7 @@ async def main():
     await asyncio.sleep(2)
     protocol = await Context.create_client_context()
 
-    request = Message(code=GET, uri='coap://localhost/other/separate')
+    request = Message(code=GET, uri='coap://10.0.0.3/other/separate')
 
     try:
         response = await protocol.request(request).response

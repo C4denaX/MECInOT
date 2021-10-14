@@ -3,7 +3,7 @@ import random
 from time import sleep
 
 connection = pika.BlockingConnection(
-    pika.ConnectionParameters(host='localhost'))
+    pika.ConnectionParameters(host='10.0.0.4'))
 channel = connection.channel()
 
 channel.queue_declare(queue='hello')
