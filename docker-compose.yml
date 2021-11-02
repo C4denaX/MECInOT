@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  mqtt_client:
+    build: IoT/mqtt/.
+  coap_client_get:
+    build:
+      context: ./IoT/coap
+      dockerfile: ./Dockerfile.get
+  coap_client_put:
+    build:
+      context: ./IoT/coap
+      dockerfile: ./Dockerfile.put
+  modbus_client_reader:
+    build: 
+      context: ./OT/modbus
+      dockerfile: ./Dockerfile.read
+  modbus_client_writer:
+    build:
+      context: ./OT/modbus
+      dockerfile:  ./Dockerfile.write
+  opc_client:
+    build: OT/OPC_CUA/.
+  https_user:
+    build: 
+      context: ./IT/https
+      dockerfile: ./Dockerfile.user
+  streaming_user:
+    build: 
+      context: ./IT/Streaming
+      dockerfile: ./Dockerfile.user
+
+
+
