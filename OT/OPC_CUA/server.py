@@ -6,6 +6,19 @@ import time
 from opcua import ua, Server
 
 
+import random
+
+import string
+
+
+def get_random_string(length):
+    # With combination of lower and upper case
+    result_str = ''.join(random.choice(string.ascii_letters) for i in range(length))
+    # print random string
+    return result_str
+
+
+
 if __name__ == "__main__":
 
     # setup our server
@@ -30,9 +43,9 @@ if __name__ == "__main__":
     try:
         count = 0
         while True:
-            time.sleep(1)
+            time.sleep(random.randint(1,9))
             count += 0.1
-            myvar.set_value(count)
+            myvar.set_value(get_random_string(10))
     finally:
         #close connection, remove subcsriptions, etc
         server.stop()
