@@ -17,7 +17,7 @@ if __name__=='__main__':
 	parser.add_option("-b", "--brokerip", action="store", dest="brokerip", metavar="<broker-IP>", default="localhost", help="MQTT broker IP. Default is localhost")
 	
 	(options, args) = parser.parse_args()
-	broker_ip = "10.0.0.2"
+	broker_ip = "192.168.1.65"
 	port = 1883
 	mqtt_client = mqtt.Client()
 	mqtt_client.on_connect = on_connect
@@ -26,6 +26,6 @@ if __name__=='__main__':
 	mqtt_client.subscribe("topic")
 	mqtt_client.loop_start()
 	while True:
-		time.sleep(1)
+		time.sleep(3)
 		mqtt_client.publish("topic", "temp:" + str(random.randint(20,45)))
 	

@@ -1,0 +1,23 @@
+Para hacer funcionar la puta libreria en raspberry pi tienes que hacer algunas modificaciones adicionales...
+
+
+Este problema se puede resolver con los siguientes pasos:
+
+    Descarga snap7 con el siguiente comando:
+    git clone https://github.com/lizengjie/snap7-debian.git
+
+    Compilar
+    cd snap7-debian/build/unix && sudo make -f arm_v7_linux.mk all
+
+    Copiar
+    sudo cp ../bin/arm_v7-linux/libsnap7.so /usr/lib/libsnap7.so
+    sudo cp ../bin/arm_v7-linux/libsnap7.so /usr/local/lib/libsnap7.so
+
+    sudo ldconfig
+
+    Opcional
+    sudo apt-get install python-pip3
+
+    Instalar la biblioteca python snap7
+    sudo pip3 install python-snap7
+

@@ -2,6 +2,14 @@ version: "3.9"
 services:
   mqtt_client:
     build: IoT/mqtt/.
+  amqp_sender:
+    build:
+      context:  ./IoT/amqp
+      dockerfile: ./Dockerfile.send
+  amqp_reciever:
+    build:
+      context:  ./IoT/amqp
+      dockerfile: ./Dockerfile.recv
   coap_client_get:
     build:
       context: ./IoT/coap

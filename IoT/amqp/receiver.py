@@ -1,7 +1,8 @@
 import pika, sys, os
 
 def main():
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='10.0.0.4'))
+    creden = pika.PlainCredentials("test","test")
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host='192.168.1.65',credentials=creden))
     channel = connection.channel()
 
     channel.queue_declare(queue='hello')

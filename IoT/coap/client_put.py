@@ -15,8 +15,8 @@ async def main():
 
     await asyncio.sleep(2)
 
-    payload = b"The quick brown fox jumps over the lazy dog.\n" * 30
-    request = Message(code=PUT, payload=payload, uri="coap://10.0.0.3/other/block")
+    payload = b"The quick brown fox jumps over the lazy dog..\n"
+    request = Message(code=PUT, payload=payload, uri="coap://192.168.1.65/other/block")
 
     response = await context.request(request).response
 
