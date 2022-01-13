@@ -28,6 +28,14 @@ services:
       dockerfile:  ./Dockerfile.write
   opc_client:
     build: OT/OPC_CUA/.
+  s7_client_reader:
+    build:
+      context: ./OT/s7
+      dockerfile: ./Dockerfile.read
+  s7_client_writer:
+    build:
+      context: ./OT/s7
+      dockerfile:  ./Dockerfile.write
   https_user:
     build: 
       context: ./IT/https
