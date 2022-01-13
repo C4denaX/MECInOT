@@ -6,7 +6,7 @@ from snap7.server import mainloop
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-port = 1102
+port = 102
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:

@@ -6,7 +6,7 @@ from time import sleep
 import random
 client = snap7.client.Client()
 
-client.connect("192.168.1.65",0,0,1102)
+client.connect("192.168.1.65",0,0,102)
 
 print(client.get_connected())
 

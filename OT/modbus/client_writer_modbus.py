@@ -35,6 +35,7 @@ while True:
         print("----------")
         print("")
         for addr in range(4):
+            c.write_single_coil(addr,toggle)
             print("bit #" + str(addr) + ": write to " + str(toggle))
             time.sleep(0.5)
 
