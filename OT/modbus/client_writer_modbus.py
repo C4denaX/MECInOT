@@ -7,7 +7,7 @@
 from pyModbusTCP.client import ModbusClient
 import time
 
-SERVER_HOST = "10.0.0.6"
+SERVER_HOST = "127.0.0.1"
 SERVER_PORT = 502
 
 c = ModbusClient()
@@ -35,11 +35,7 @@ while True:
         print("----------")
         print("")
         for addr in range(4):
-            is_ok = c.write_single_coil(addr, toggle)
-            if is_ok:
-                print("bit #" + str(addr) + ": write to " + str(toggle))
-            else:
-                print("bit #" + str(addr) + ": unable to write " + str(toggle))
+            print("bit #" + str(addr) + ": write to " + str(toggle))
             time.sleep(0.5)
 
         time.sleep(1)

