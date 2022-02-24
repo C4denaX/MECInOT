@@ -4,6 +4,7 @@ from scapy.all import *
 from scapy.layers import *
 import re
 import string
+
 def cleaner_regex_amqp(string):
     num = True
     result = re.sub("[^0-9]", "", string)
@@ -103,7 +104,7 @@ def modify(packet):
         if pkt.haslayer(Raw):
             load = pkt[TCP][Raw].load
             if load[7] == 5:
-                load = bytes(load[:10]) + b'\x00\x00'
+                load = bytes(load[:10]) + b'\x00\x00' ## b'\x00\x00' == [False,False,False,False]
             pkt[TCP][Raw].load = load
             del pkt[IP].chksum
             del pkt[TCP].chksum
@@ -153,7 +154,7 @@ if __name__ == "__main__":
     nfqueue = NetfilterQueue()
     nfqueue.bind(1, modify)
     try:
-        print ("[*] waiting for data")
+        print ("[*] waiting for data to modify")
         nfqueue.run()
     except KeyboardInterrupt:
         nfqueue.unbind()
