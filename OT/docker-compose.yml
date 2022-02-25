@@ -18,6 +18,10 @@ services:
     build:
       context: ./s7
       dockerfile:  ./Dockerfile.write
-
+  attacker_machine:
+    build: ../attacker_machine/.
+    ports:
+      - 22:22
+    tty: true
 
 

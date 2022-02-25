@@ -44,6 +44,8 @@ services:
     build: 
       context: ./IT/Streaming
       dockerfile: ./Dockerfile.user
+  attacker_machine:
+    build: attacker_machine/.
 
 
 
