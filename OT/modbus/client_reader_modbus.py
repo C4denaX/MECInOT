@@ -7,7 +7,7 @@
 from pyModbusTCP.client import ModbusClient
 import time
 import random
-SERVER_HOST = "127.0.0.1"
+SERVER_HOST = "10.0.0.2"
 SERVER_PORT = 502
 SERVER_U_ID = 1
 

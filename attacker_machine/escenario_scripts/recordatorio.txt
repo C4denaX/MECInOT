@@ -1,0 +1,3 @@
+Acuerdate que el netfilterqueue daba fallos a la hora de instalarlo desde el pip, se tiene que instalar desde el propio proyecto de github y a su vez se debe de tocar una linea de código para que funcione correctamente
+
+Parece ser que le han vuelto a dar soporte y ya lo van a actualizar para evitar realizar tantos pasos...

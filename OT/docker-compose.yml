@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  modbus_client_reader:
+    build: 
+      context: ./modbus
+      dockerfile: ./Dockerfile.read
+  modbus_client_writer:
+    build:
+      context: ./modbus
+      dockerfile:  ./Dockerfile.write
+  opc_client:
+    build: ./OPC_CUA/.
+  s7_client_reader:
+    build:
+      context: ./s7
+      dockerfile: ./Dockerfile.read
+  s7_client_writer:
+    build:
+      context: ./s7
+      dockerfile:  ./Dockerfile.write
+  attacker_machine:
+    build: ../attacker_machine/.
+    ports:
+      - 22:22
+    tty: true
+
+
